@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by Sudhanshu on 20-08-2017.
  */
@@ -51,6 +53,18 @@ public class TimetableContract {
          */
         public static final int CLASS_YES = 1;
         public static final int CLASS_NO = 0;
+
+        /**
+         * Values for the selected day
+         */
+        public static final int DAY_NO_DAY = 0;
+        public static final int DAY_MONDAY = 1;
+        public static final int DAY_TUESDAY = 2;
+        public static final int DAY_WEDNESDAY = 3;
+        public static final int DAY_THURSDAY = 4;
+        public static final int DAY_FRIDAY = 5;
+        public static final int DAY_SATURDAY = 6;
+        public static final int DAY_SUNDAY = 7;
     }
 
 
@@ -76,6 +90,7 @@ public class TimetableContract {
 
         public static final String TABLE_NAME = "subjects";
         public static final String _ID = BaseColumns._ID;
+        public static final String COLUMN_SUBJECT_NAME = "subject name";
         public static final String COLUMN_CLASSES_PRESENT = "classes present";
         public static final String COLUMN_ALL_CLASSES = "total classes";
     }

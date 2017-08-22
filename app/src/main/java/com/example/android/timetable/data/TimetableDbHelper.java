@@ -14,7 +14,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_TIMETABLE_ENTRIES =
             "CREATE TABLE " + TimetableEntry.TABLE_NAME + "(" +
-                    TimetableEntry._ID + "INTEGER PRIMARY KEY," +
+                    TimetableEntry._ID + " INTEGER PRIMARY KEY," +
                     TimetableEntry.COLUMN_SUBJECT_CODE + " INTEGER," +
                     TimetableEntry.COLUMN_ON_MONDAY + " INTEGER," +
                     TimetableEntry.COLUMN_ON_TUESDAY + " INTEGER," +
@@ -32,7 +32,8 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_SUBJECT_ENTRIES =
             "CREATE TABLE " + SubjectEntry.TABLE_NAME + "(" +
-                    SubjectEntry._ID + "INTEGER PRIMARY KEY," +
+                    SubjectEntry._ID + " INTEGER PRIMARY KEY," +
+                    SubjectEntry.COLUMN_SUBJECT_NAME + " TEXT," +
                     SubjectEntry.COLUMN_ALL_CLASSES + " INTEGER," +
                     SubjectEntry.COLUMN_CLASSES_PRESENT + " INTEGER)";
 

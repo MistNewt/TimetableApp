@@ -6,5 +6,8 @@
     <dimen name="activity_margin">16dp</dimen>
 
     <!-- Days margin -->
-    <string name = "days_margin">16dp</string>
+    <dimen name = "days_margin">16dp</dimen>
+
+    <!-- Margin/Padding elements -->
+    <dimen name = "element_large">48dp</dimen>
 </resources>

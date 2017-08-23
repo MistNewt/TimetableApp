@@ -20,6 +20,12 @@
     <!-- Hint for total classes edit text -->
     <string name="hint_total_classes">Total Classes</string>
 
+    <!-- CARD VIEW ATTRIBUTES -->
+    <!-- Title for total subjects in a day-->
+    <string name = "title_total_subjects">Total Subjects:</string>
+    <!-- Title for overall percentage on a day -->
+    <string name = "title_overall_per">Overall %:</string>
+
     <!-- DAYS OF A WEEK -->
     <string name="day_sunday">Sunday</string>
     <string name="day_monday">Monday</string>

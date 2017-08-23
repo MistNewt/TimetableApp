@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Find the ListView which will be populated
-        ListView subjectListView = (ListView)findViewById(R.id.list);
+        //ListView subjectListView = (ListView)findViewById(R.id.list);
 
         // Attach the loader to the list view
         mCursorAdapter = new SubjectCursorAdapter(this,null);
-        subjectListView.setAdapter(mCursorAdapter);
+       // subjectListView.setAdapter(mCursorAdapter);
 
         // Setup FAB to open AddSubjectActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

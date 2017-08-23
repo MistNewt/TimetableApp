@@ -10,4 +10,7 @@
 
     <!-- Margin/Padding elements -->
     <dimen name = "element_large">48dp</dimen>
+
+    <!-- Card View Height -->
+    <dimen name = "height_card_view">200dp</dimen>
 </resources>

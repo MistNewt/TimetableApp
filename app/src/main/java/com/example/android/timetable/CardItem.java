@@ -9,10 +9,10 @@ public class CardItem {
     private int mTotalSubjects;
     private double mOverallPercentage;
 
-    public CardItem() {
-        mDayTitle="No Day Selected";
-        mTotalSubjects=0;
-        mOverallPercentage=0.0;
+    public CardItem(String title,int totalSubjects,double overallPercentage) {
+        mDayTitle = title;
+        mTotalSubjects= totalSubjects;
+        mOverallPercentage = overallPercentage;
     }
 
     public String getTitle() {

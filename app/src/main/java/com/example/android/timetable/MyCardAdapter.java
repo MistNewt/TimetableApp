@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Sudhanshu on 23-08-2017.
@@ -29,10 +32,19 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
             titleTextView = (TextView) view.findViewById(R.id.title_card_view);
             totalSubjectsTextView = (TextView) view.findViewById(R.id.card_total_subjects);
             overallPerTextView = (TextView) view.findViewById(R.id.card_overall_per);
+
+            //Setting up Click Listener
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, titleTextView.getText() + " clicked!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
-    public MyCardAdapter(Context context,ArrayList<CardItem> items) {
+    public MyCardAdapter(Context context, ArrayList<CardItem> items) {
         mContext = context;
         mCardItems = items;
     }

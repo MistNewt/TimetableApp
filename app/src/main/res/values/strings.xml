@@ -40,5 +40,14 @@
     <string name="day_no_day">No Day Selected</string>
 
     <!-- Toast messages -->
-    <string name = "toast_success_insert">Insertion Successful!</string>
+    <string name = "toast_subject_save_success">Subject Successfully Saved!</string>
+    <string name = "toast_subject_save_failed">Subject can\'t be saved!</string>
+
+    <!-- Alert messages -->
+    <!-- Unsaved changes alert message -->
+    <string name="unsaved_changes_alert">Discard your changes and quit editing?</string>
+    <!-- Discard changes alert dialog selection -->
+    <string name="discard">Discard</string>
+    <!-- Keep editing alert dialog selection -->
+    <string name="keep_editing">Keep editing</string>
 </resources>

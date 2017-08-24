@@ -80,13 +80,13 @@ public class SubjectProvider extends ContentProvider {
         // Sanity checking the data
         String subjectName = values.getAsString(SubjectEntry.COLUMN_SUBJECT_NAME);
         Integer classesPresent = values.getAsInteger(SubjectEntry.COLUMN_CLASSES_PRESENT);
-        Integer allClasses = values.getAsInteger(SubjectEntry.COLUMN_ALL_CLASSES);
+        Integer totalClasses = values.getAsInteger(SubjectEntry.COLUMN_TOTAL_CLASSES);
 
         if (subjectName == null || subjectName.equals(""))
             throw new IllegalArgumentException("Subject requires a name");
         if (classesPresent == null || classesPresent < 0)
             throw new IllegalArgumentException("Classes present not a valid number");
-        if (allClasses == null || allClasses < 0)
+        if (totalClasses == null || totalClasses < 0)
             throw new IllegalArgumentException("All Classes not a valid number");
 
         // Get writable database
@@ -118,6 +118,8 @@ public class SubjectProvider extends ContentProvider {
         //TODO: This needs to be implemented
         return 0;
     }
+
+
 
     @Nullable
     @Override

@@ -51,7 +51,7 @@ public class SubjectCursorAdapter extends CursorAdapter {
 
         int nameColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_SUBJECT_NAME);
         int presentColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_CLASSES_PRESENT);
-        int totalColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_ALL_CLASSES);
+        int totalColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_TOTAL_CLASSES);
 
         int presentClasses = cursor.getInt(presentColIndex);
         int totalClasses = cursor.getInt(totalColIndex);

@@ -22,7 +22,7 @@
             android:layout_weight="2">
 
             <EditText
-                android:id="@+id/subject_name"
+                android:id="@+id/edit_subject_name"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_subject_name" />
         </LinearLayout>
@@ -45,12 +45,12 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/classes_present"
+                android:id="@+id/edit_classes_present"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_classes_present" />
 
             <EditText
-                android:id="@+id/total_classes"
+                android:id="@+id/edit_total_classes"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_total_classes" />
 

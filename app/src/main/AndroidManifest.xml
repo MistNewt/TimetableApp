@@ -27,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <provider
+            android:name=".data.SubjectProvider"
+            android:authorities="com.example.android.timetable"
+            android:exported="false" />
+        <provider
+            android:name=".data.TimetableProvider"
+            android:authorities="com.example.android.timetable"
+            android:exported="false" />
     </application>
 
 </manifest>

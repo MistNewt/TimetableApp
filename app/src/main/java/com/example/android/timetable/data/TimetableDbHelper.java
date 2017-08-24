@@ -34,7 +34,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + SubjectEntry.TABLE_NAME + "(" +
                     SubjectEntry._ID + " INTEGER PRIMARY KEY," +
                     SubjectEntry.COLUMN_SUBJECT_NAME + " TEXT," +
-                    SubjectEntry.COLUMN_ALL_CLASSES + " INTEGER," +
+                    SubjectEntry.COLUMN_TOTAL_CLASSES + " INTEGER," +
                     SubjectEntry.COLUMN_CLASSES_PRESENT + " INTEGER)";
 
     private static final String SQL_DELETE_SUBJECT_ENTRIES =

@@ -39,7 +39,7 @@ public class TimetableContract {
 
         public static final String TABLE_NAME = "timetable";
         public static final String _ID = BaseColumns._ID;
-        public static final String COLUMN_SUBJECT_CODE = "subject code";
+        public static final String COLUMN_SUBJECT_CODE = "subject_code";
         public static final String COLUMN_ON_MONDAY = "monday";
         public static final String COLUMN_ON_TUESDAY = "tuesday";
         public static final String COLUMN_ON_WEDNESDAY = "wednesday";
@@ -89,9 +89,9 @@ public class TimetableContract {
 
         public static final String TABLE_NAME = "subjects";
         public static final String _ID = BaseColumns._ID;
-        public static final String COLUMN_SUBJECT_NAME = "subject name";
-        public static final String COLUMN_CLASSES_PRESENT = "classes present";
-        public static final String COLUMN_ALL_CLASSES = "total classes";
+        public static final String COLUMN_SUBJECT_NAME = "subject_name";
+        public static final String COLUMN_CLASSES_PRESENT = "classes_present";
+        public static final String COLUMN_TOTAL_CLASSES = "total_classes";
 
 
         /**

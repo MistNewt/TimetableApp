@@ -87,11 +87,20 @@ public class TimetableContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_SUBJECT;
 
-
         public static final String TABLE_NAME = "subjects";
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_SUBJECT_NAME = "subject name";
         public static final String COLUMN_CLASSES_PRESENT = "classes present";
         public static final String COLUMN_ALL_CLASSES = "total classes";
+
+
+        /**
+         * Used to initialize the initial ContentValues object.
+         * This will not be used to create a column.
+         * The initial ContentValues object will be splitted into two
+         * and then will be used in repective tables
+          */
+
+        public static final String DAY_INPUT = "day";
     }
 }

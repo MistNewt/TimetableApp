@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,13 +19,10 @@ public class TimetableProvider extends ContentProvider {
     public static final String LOG_TAG = TimetableProvider.class.getSimpleName();
 
     // Uri Matcher code for the content URL for TimetableEntry
-    // and SubjectEntry tables
     private static final int T_TABLE = 100;
-    private static final int SUBJECTS = 200;
 
-    // Uri matcher for the content of tables
+    // Uri matcher for the content of table
     private static final int T_TABLE_ID = 101;
-    private static final int SUBJECT_ID = 201;
 
     /**
      * UriMatcher object to match a content URI to a corresponding code.
@@ -38,17 +36,10 @@ public class TimetableProvider extends ContentProvider {
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
                 TimetableContract.PATH_TIMETABLE, T_TABLE);
 
-        // Maps SUBJECTS to respective URI
-        sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
-                TimetableContract.PATH_SUBJECT, SUBJECTS);
-
         // Maps T_TABLE_ID to respective URI
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
                 TimetableContract.PATH_TIMETABLE + "/#", T_TABLE_ID);
 
-        // Maps SUBJECT_ID to respective URI
-        sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
-                TimetableContract.PATH_SUBJECT + "/#", SUBJECT_ID);
     }
 
     //TimetableDbHelper object
@@ -70,7 +61,7 @@ public class TimetableProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        //TODO: This needs to be implemented
+       // TODO: This needs to be implemented
         return null;
     }
 

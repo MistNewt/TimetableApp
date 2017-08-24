@@ -3,6 +3,9 @@
 
     <string name="attendance">Attendance</string>
 
+    <!-- Label for editor menu option to save pet and leave editor-->
+    <string name="action_save">Save</string>
+
     <!-- Add new subject activity title -->
     <string name="title_add_subject">Add Subject</string>
 
@@ -35,4 +38,7 @@
     <string name="day_friday">Friday</string>
     <string name="day_saturday">Saturday</string>
     <string name="day_no_day">No Day Selected</string>
+
+    <!-- Toast messages -->
+    <string name = "toast_success_insert">Insertion Successful!</string>
 </resources>

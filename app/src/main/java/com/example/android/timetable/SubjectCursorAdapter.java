@@ -2,6 +2,7 @@ package com.example.android.timetable;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,10 +57,10 @@ public class SubjectCursorAdapter extends CursorAdapter {
         int presentClasses = cursor.getInt(presentColIndex);
         int totalClasses = cursor.getInt(totalColIndex);
 
-        double attendance = (double) presentClasses / totalClasses;
+        double attendance = ((double) presentClasses / totalClasses)*100;
         // Rounding-off to two decimal places
-        attendance = Math.round(attendance*100.0)/100.0;
-
+        attendance = Math.round(attendance*100.0);
+        attendance /= 100;
         nameTextView.setText(cursor.getString(nameColIndex));
         attendanceTextView.setText(context.getString(R.string.attendance) + ": " +
                 Double.toString(attendance)+" %");

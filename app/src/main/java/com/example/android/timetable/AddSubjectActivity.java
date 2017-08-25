@@ -76,7 +76,9 @@ public class AddSubjectActivity extends AppCompatActivity {
             case R.id.action_save:
                 // Insert new subject
                 saveSubject();
-                // Respond to a click on the "Up" arrow button in the app bar
+                // Return to parent activity
+                finish();
+            // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
                 // If the pet hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.

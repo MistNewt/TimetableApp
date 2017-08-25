@@ -1,19 +1,18 @@
 package com.example.android.timetable;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.example.android.timetable.data.TimetableContract.TimetableEntry;
 import java.util.ArrayList;
-import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Sudhanshu on 23-08-2017.
@@ -39,9 +38,37 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
                 public void onClick(View view) {
                     Toast.makeText(mContext, titleTextView.getText() + " clicked!",
                             Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext,ActivityAddToDay.class);
+                    Uri intentUri = ContentUris.withAppendedId(TimetableEntry.CONTENT_URI,
+                            getDayId(titleTextView.getText().toString()));
+                    intent.setData(intentUri);
+                    mContext.startActivity(intent);
                 }
             });
         }
+    }
+
+    // Map the day to the id
+    private int getDayId(String day) {
+        int id;
+        switch(day){
+            case "Monday": id = TimetableEntry.DAY_MONDAY;
+                break;
+            case "Tuesday": id = TimetableEntry.DAY_TUESDAY;
+                break;
+            case "Wednesday": id = TimetableEntry.DAY_WEDNESDAY;
+                break;
+            case "Thurdsay": id = TimetableEntry.DAY_THURSDAY;
+                break;
+            case "Friday": id=TimetableEntry.DAY_FRIDAY;
+                break;
+            case "Saturday": id = TimetableEntry.DAY_SATURDAY;
+                break;
+            case "Sunday": id = TimetableEntry.DAY_SUNDAY;
+                break;
+            default: id = TimetableEntry.DAY_NO_DAY;
+        }
+        return id;
     }
 
     public MyCardAdapter(Context context, ArrayList<CardItem> items) {

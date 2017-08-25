@@ -16,7 +16,7 @@ import com.example.android.timetable.data.TimetableContract.SubjectEntry;
  */
 public class SubjectsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final int SUBJECT_LOADER = 0;
+    public static final int SUBJECT_LOADER = 200;
 
     SubjectCursorAdapter mCursorAdapter;
 

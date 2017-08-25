@@ -34,10 +34,19 @@ public class MainActivity extends AppCompatActivity {
         mDayView = (TextView) findViewById(R.id.dayview_activity);
         mSubjectsView = (TextView) findViewById(R.id.subjects_activity);
 
+        // Setting ClickListeners to open respective activities
         mDayView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,DayViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mSubjectsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SubjectsActivity.class);
                 startActivity(intent);
             }
         });

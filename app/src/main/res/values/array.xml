@@ -11,14 +11,4 @@
 -->
 <resources>
     <!-- These are the options displayed in the gender drop-down Spinner -->
-    <string-array name="array_week_days">
-        <item>@string/day_no_day</item>
-        <item>@string/day_monday</item>
-        <item>@string/day_tuesday</item>
-        <item>@string/day_wednesday</item>
-        <item>@string/day_thursday</item>
-        <item>@string/day_friday</item>
-        <item>@string/day_saturday</item>
-        <item>@string/day_sunday</item>
-    </string-array>
 </resources>

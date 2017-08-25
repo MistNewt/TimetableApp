@@ -11,7 +11,6 @@
 
     <!-- ADD NEW SUBJECT RELATED STRING -->
     <!-- Category Day -->
-    <string name="category_day">Day</string>
     <!-- Category Subject -->
     <string name="category_subject">Subject</string>
     <!-- Category Attendance -->
@@ -30,13 +29,6 @@
     <string name = "title_overall_per">Overall %:</string>
 
     <!-- DAYS OF A WEEK -->
-    <string name="day_sunday">Sunday</string>
-    <string name="day_monday">Monday</string>
-    <string name="day_tuesday">Tuesday</string>
-    <string name="day_wednesday">Wednesday</string>
-    <string name="day_thursday">Thursday</string>
-    <string name="day_friday">Friday</string>
-    <string name="day_saturday">Saturday</string>
     <string name="day_no_day">No Day Selected</string>
 
     <!-- Toast messages -->

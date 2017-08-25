@@ -58,9 +58,42 @@ public class SubjectProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
-                        String[] SelectionArgs, String sortOrder) {
-        //TODO: This needs to be implemented
-        return null;
+                        String[] selectionArgs, String sortOrder) {
+        // Get readable database
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+
+        // This cursor will hold the result
+        Cursor cursor;
+
+        // Matching URI to a specific code
+        int match = sUriMatcher.match(uri);
+        switch(match) {
+            case SUBJECTS:
+                // Needs to query the entire subjects table
+                cursor = database.query(SubjectEntry.TABLE_NAME,projection,selection,
+                        selectionArgs,null,null,sortOrder);
+                break;
+            case SUBJECT_ID:
+                // A specific subject is being queried
+
+                // For every "?" in the selection, we need to have an element in the selection
+                // arguments that will fill in the "?". Since we have 1 question mark in the
+                // selection, we have 1 String in the selection arguments' String array.
+                selection = SubjectEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+
+                // Perform the query
+                cursor = database.query(SubjectEntry.TABLE_NAME,projection,selection,
+                        selectionArgs,null,null,sortOrder);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot query; unknown URI "+uri);
+        }
+        // Set notification uri for change when
+        //  getContext().getContentResolver().notifyChange(uri,null);
+        // is called
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
     }
 
     @Override

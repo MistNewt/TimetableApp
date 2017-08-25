@@ -52,7 +52,7 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
                 SubjectEntry.COLUMN_SUBJECT_NAME,
                 SubjectEntry.COLUMN_CLASSES_PRESENT,
                 SubjectEntry.COLUMN_TOTAL_CLASSES,
-                //SubjectEntry._ID
+                SubjectEntry._ID
         };
 
         return new CursorLoader(this,

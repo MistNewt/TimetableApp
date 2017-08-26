@@ -58,7 +58,7 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
                 break;
             case "Wednesday": id = TimetableEntry.DAY_WEDNESDAY;
                 break;
-            case "Thurdsay": id = TimetableEntry.DAY_THURSDAY;
+            case "Thursday": id = TimetableEntry.DAY_THURSDAY;
                 break;
             case "Friday": id=TimetableEntry.DAY_FRIDAY;
                 break;

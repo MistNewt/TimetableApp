@@ -185,7 +185,7 @@ public class TimetableProvider extends ContentProvider {
                 break;
             default:
                 Log.v(LOG_TAG,"The day can't be resolved");
-                throw new IllegalArgumentException("The day can't be resolved");
+                throw new IllegalArgumentException("The day can't be resolved.Col id = "+col_id );
         }
     }
 

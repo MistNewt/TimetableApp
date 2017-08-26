@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +51,6 @@ public class DayViewActivity extends AppCompatActivity {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mMyCardAdapter);
 
-        generateFakeData(); // Fake data for filling the initial cards
         // Setup FAB to open AddSubjectActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,20 +60,32 @@ public class DayViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        generateData();
 
     }
 
     /**
-     * Generating fake data
+     * Generate the card data
      */
-    private void generateFakeData() {
-        mCardList.add(new CardItem("Monday", 0, 0));
-        mCardList.add(new CardItem("Tuesday", 0, 0));
-        mCardList.add(new CardItem("Wednesday", 0, 0));
-        mCardList.add(new CardItem("Thursday", 0, 0));
-        mCardList.add(new CardItem("Friday", 0, 0));
-        mCardList.add(new CardItem("Saturday", 0, 0));
-
+    private void generateData() {
+        String days [] = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+        int day_id = 0;
+        Uri uri = TimetableEntry.CONTENT_URI,currentUri;
+        mCardList.clear();
+        String [] projection = {
+                SubjectEntry.COLUMN_CLASSES_PRESENT,
+                SubjectEntry.COLUMN_TOTAL_CLASSES,
+                SubjectEntry._ID
+        };
+        Cursor resCursor;   // Stores the query result
+        // Perform a query on the tables
+        for(int i = 0;i<days.length;i++) {
+            day_id = MyCardAdapter.getDayId(days[i]);
+            currentUri = ContentUris.withAppendedId(uri,day_id);
+            resCursor = getContentResolver().query(currentUri,projection,null,null,null);
+            int totalSubject = resCursor.getCount();
+            mCardList.add(new CardItem(days[i],totalSubject));
+        }
         mMyCardAdapter.notifyDataSetChanged();
     }
 

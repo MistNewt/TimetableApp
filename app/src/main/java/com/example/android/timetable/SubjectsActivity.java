@@ -61,42 +61,61 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view,
                                         int position, long id) {
-                    Toast.makeText(getApplicationContext(), "Id of item: " + id,
-                            Toast.LENGTH_SHORT).show();
 
                     // Initialising values for columns
                     // and setting all days to false
                     ContentValues values = new ContentValues();
-                    values.put(TimetableEntry.COLUMN_SUBJECT_CODE,id);
-                    values.put(TimetableEntry.COLUMN_ON_MONDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_TUESDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_WEDNESDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_THURSDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_FRIDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_SATURDAY,TimetableEntry.CLASS_NO);
-                    values.put(TimetableEntry.COLUMN_ON_SUNDAY,TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_SUBJECT_CODE, id);
+                    values.put(TimetableEntry.COLUMN_ON_MONDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_TUESDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_WEDNESDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_THURSDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_FRIDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_SATURDAY, TimetableEntry.CLASS_NO);
+                    values.put(TimetableEntry.COLUMN_ON_SUNDAY, TimetableEntry.CLASS_NO);
 
-                    int currentDayCode = (int)ContentUris.parseId(mCurrentUri);
+                    int currentDayCode = (int) ContentUris.parseId(mCurrentUri);
                     String currentDay = matchDay(currentDayCode);
 
                     // Updating the class column
-                    if(values.containsKey(currentDay)) {
+                    if (values.containsKey(currentDay)) {
                         values.remove(currentDay);
-                        values.put(currentDay,TimetableEntry.CLASS_YES);
+                        values.put(currentDay, TimetableEntry.CLASS_YES);
                     }
 
-                    // Inserting into timetable table
-                    Uri newUri = getContentResolver().insert(TimetableEntry.CONTENT_URI,values);
-                    //Display appropriate toast message
-                    if (newUri != null) {
-                        Toast.makeText(getApplicationContext(),
-                                getString(R.string.toast_subject_add_day_success),
-                                Toast.LENGTH_SHORT).show();
+                    // Query for existing record
+                    String projection[] = {
+                            SubjectEntry._ID
+                    };
+                    boolean flag = false;   // If the subject already exists
+                    try (Cursor queryCursor = getContentResolver().query(mCurrentUri, projection,
+                            null, null, null)) {
+                        int sub_index = queryCursor.getColumnIndex(SubjectEntry._ID);
+                        while (queryCursor.moveToNext()) {
+                            int sub_id = queryCursor.getInt(sub_index);
+                            if (sub_id == id) {
+                                flag = true;
+                            }
+                        }
                     }
-                    else {
+                    if (flag) {
                         Toast.makeText(getApplicationContext(),
-                                getString(R.string.toast_subject_add_day_failed),
+                                getString(R.string.toast_subject_already_exists),
                                 Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        // Inserting into timetable table
+                        Uri newUri = getContentResolver().insert(TimetableEntry.CONTENT_URI, values);
+                        //Display appropriate toast message
+                        if (newUri != null) {
+                            Toast.makeText(getApplicationContext(),
+                                    getString(R.string.toast_subject_add_day_success),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    getString(R.string.toast_subject_add_day_failed),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });
@@ -108,7 +127,7 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
 
     private String matchDay(int dayCode) {
         String day;
-        switch(dayCode) {
+        switch (dayCode) {
             case TimetableEntry.DAY_MONDAY:
                 day = TimetableEntry.COLUMN_ON_MONDAY;
                 break;
@@ -131,8 +150,8 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
                 day = TimetableEntry.COLUMN_ON_SUNDAY;
                 break;
             default:
-                Log.v(LOG_TAG,"Invalid day, unknown uri "+mCurrentUri);
-                throw new IllegalArgumentException("Invalid day, unknown uri "+mCurrentUri);
+                Log.v(LOG_TAG, "Invalid day, unknown uri " + mCurrentUri);
+                throw new IllegalArgumentException("Invalid day, unknown uri " + mCurrentUri);
         }
         return day;
     }
@@ -140,18 +159,16 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
-        // Perform the query to get the subject details
+        String[] projection = {
+                SubjectEntry.COLUMN_SUBJECT_NAME,
+                SubjectEntry.COLUMN_CLASSES_PRESENT,
+                SubjectEntry.COLUMN_TOTAL_CLASSES,
+                SubjectEntry._ID
+        };
 
-            String[] projection = {
-                    SubjectEntry.COLUMN_SUBJECT_NAME,
-                    SubjectEntry.COLUMN_CLASSES_PRESENT,
-                    SubjectEntry.COLUMN_TOTAL_CLASSES,
-                    SubjectEntry._ID
-            };
-
-            return new CursorLoader(this,
-                    SubjectEntry.CONTENT_URI,
-                    projection, null, null, null);
+        return new CursorLoader(this,
+                SubjectEntry.CONTENT_URI,
+                projection, null, null, null);
     }
 
     @Override

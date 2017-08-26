@@ -30,9 +30,6 @@ public class TimetableProvider extends ContentProvider {
     // Uri matcher for the content of table
     private static final int T_TABLE_DAY = 101;
 
-    // Uri matcher for adding a subject to a day
-    private static final int T_TABLE_DAY_SUBJECT = 102;
-
     // Uri Matcher code for the content URL
     private static final int SUBJECTS = 200;
     // Uri matcher for the content of tables
@@ -58,9 +55,6 @@ public class TimetableProvider extends ContentProvider {
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
                 TimetableContract.PATH_TIMETABLE + "/#", T_TABLE_DAY);
 
-        // Maps T_TABLE_ID to respective URI
-        sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
-                TimetableContract.PATH_TIMETABLE + "/#/#", T_TABLE_DAY_SUBJECT);
 
         // Maps SUBJECTS to respective URI
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
@@ -148,7 +142,11 @@ public class TimetableProvider extends ContentProvider {
     // Converts projection string array into one string
     // used for rawQuery()
     private String getProjectionString(String [] projection) {
-        String myProjection = projection[0];
+        String myProjection;
+        if(projection[0].equals("_id"))     // Removing ambiguity
+            myProjection = "b._id";
+        else
+            myProjection = projection[0];
         for(int i=1;i<projection.length;i++) {
             if(projection[i].equals("_id")) { // The _ID is subject table's id
                 myProjection += "," + "b._id";  // b is being used as its alias

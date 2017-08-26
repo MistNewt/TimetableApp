@@ -30,7 +30,6 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
             super(view);
             titleTextView = (TextView) view.findViewById(R.id.title_card_view);
             totalSubjectsTextView = (TextView) view.findViewById(R.id.card_total_subjects);
-            overallPerTextView = (TextView) view.findViewById(R.id.card_overall_per);
 
             //Setting up Click Listener
             view.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +48,7 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
     }
 
     // Map the day to the id
-    private int getDayId(String day) {
+    public static int getDayId(String day) {
         int id;
         switch(day){
             case "Monday": id = TimetableEntry.DAY_MONDAY;
@@ -89,7 +88,6 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
         CardItem cardItem = mCardItems.get(position);
         holder.titleTextView.setText(cardItem.getTitle());
         holder.totalSubjectsTextView.setText(Integer.toString(cardItem.getTotalSubjects()));
-        holder.overallPerTextView.setText(Double.toString(cardItem.getOverallPercentage()));
     }
 
     @Override

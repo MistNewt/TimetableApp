@@ -34,6 +34,8 @@
     <!-- Toast messages -->
     <string name = "toast_subject_save_success">Subject Successfully Saved!</string>
     <string name = "toast_subject_save_failed">Subject can\'t be saved!</string>
+    <string name = "toast_subject_add_day_success">Subject Successfully Added!</string>
+    <string name = "toast_subject_add_day_failed">Subject can\'t be Added!</string>
 
     <!-- Alert messages -->
     <!-- Unsaved changes alert message -->

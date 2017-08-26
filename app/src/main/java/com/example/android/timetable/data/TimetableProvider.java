@@ -18,17 +18,20 @@ import com.example.android.timetable.data.TimetableContract.*;
  */
 
 public class TimetableProvider extends ContentProvider {
-
     // Tag for log messages
     public static final String LOG_TAG = TimetableProvider.class.getSimpleName();
+
     // SQL Database instance
     SQLiteDatabase database;
+
     // Uri Matcher code for the content URL for TimetableEntry
-    // This will never be used though. Just maintaining the tradition
     private static final int T_TABLE = 100;
 
     // Uri matcher for the content of table
     private static final int T_TABLE_DAY = 101;
+
+    // Uri matcher for adding a subject to a day
+    private static final int T_TABLE_DAY_SUBJECT = 102;
 
     // Uri Matcher code for the content URL
     private static final int SUBJECTS = 200;
@@ -54,6 +57,10 @@ public class TimetableProvider extends ContentProvider {
         // Maps T_TABLE_ID to respective URI
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
                 TimetableContract.PATH_TIMETABLE + "/#", T_TABLE_DAY);
+
+        // Maps T_TABLE_ID to respective URI
+        sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
+                TimetableContract.PATH_TIMETABLE + "/#/#", T_TABLE_DAY_SUBJECT);
 
         // Maps SUBJECTS to respective URI
         sUriMatcher.addURI(TimetableContract.CONTENT_AUTHORITY,
@@ -188,11 +195,33 @@ public class TimetableProvider extends ContentProvider {
         switch (match) {
             case SUBJECTS:
                 return insertSubject(uri, contentValues);
+            case T_TABLE:
+                Uri tempUri = insertTimetable(uri,contentValues);
+                Log.v(LOG_TAG,"Current uri:"+tempUri);
+                return tempUri;
             default:
                 throw new IllegalArgumentException("Insertion not supported" +
                         "for " + uri);
         }
     }
+
+    private Uri insertTimetable(Uri uri,ContentValues values) {
+        // Get writable database
+        database = mDbHelper.getWritableDatabase();
+        long id = database.insert(TimetableEntry.TABLE_NAME,null,values);
+
+        // If insertion failed
+        if (id == -1) {
+            Log.e(LOG_TAG, "Insertion failed " + uri);
+            return null;
+        }
+        // Notify change
+        getContext().getContentResolver().notifyChange(uri, null);
+        // Once we know the ID of the new row in the table,
+        // return the new URI with the ID appended to the end of it
+        return ContentUris.withAppendedId(uri, id);
+    }
+
     private Uri insertSubject(Uri uri, ContentValues values) {
 
         // Sanity checking the data
@@ -208,8 +237,8 @@ public class TimetableProvider extends ContentProvider {
             throw new IllegalArgumentException("All Classes not a valid number");
 
         // Get writable database
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        long id = db.insert(SubjectEntry.TABLE_NAME, null, values);
+        database = mDbHelper.getWritableDatabase();
+        long id = database.insert(SubjectEntry.TABLE_NAME, null, values);
 
         // If insertion failed
         if (id == -1) {

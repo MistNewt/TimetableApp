@@ -3,12 +3,15 @@ package com.example.android.timetable;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.android.timetable.data.TimetableContract.*;
@@ -24,6 +27,7 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
     public static final int DAY_LOADER = 100;
 
     SubjectCursorAdapter mCursorAdapter;
+    // For stroing the uri from intent
     Uri mCurrentUri;
 
     @Override
@@ -40,6 +44,18 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         // Set the adapter
         mCursorAdapter = new SubjectCursorAdapter(this,null);
         dayListView.setAdapter(mCursorAdapter);
+
+        // Reference to the Floating Action Button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.day_add_fab);
+        // Setting up onClickListener
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityAddToDay.this,SubjectsActivity.class);
+                intent.setData(mCurrentUri);
+                startActivity(intent);
+            }
+        });
 
         // Initializing the loader
         getLoaderManager().initLoader(DAY_LOADER,null,this);

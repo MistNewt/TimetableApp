@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,7 +56,23 @@ public class AddSubjectActivity extends AppCompatActivity {
         mClassesPresentEditText = (EditText)findViewById(R.id.edit_classes_present);
         mTotalClassesEditText = (EditText)findViewById(R.id.edit_total_classes);
 
+        // Setting up onTouchListeners
+        mSubjectNameEditText.setOnTouchListener(mTouchListner);
+        mClassesPresentEditText.setOnTouchListener(mTouchListner);
+        mTotalClassesEditText.setOnTouchListener(mTouchListner);
+
     }
+
+    // Setting up on touch listener
+    // for warning the user when pet has been changed and not saved
+
+    private View.OnTouchListener mTouchListner = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            mSubjectHasChanged = true;
+            return false;
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

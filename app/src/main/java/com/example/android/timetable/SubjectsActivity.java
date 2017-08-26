@@ -4,10 +4,14 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.timetable.data.TimetableContract.SubjectEntry;
 
@@ -20,6 +24,9 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
 
     SubjectCursorAdapter mCursorAdapter;
 
+    // For storing the uri from intent
+    Uri mCurrentUri;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +35,28 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
         // Setting the title of the activity
         setTitle("Subjects");
 
+        // Getting Intent data
+        // This will be null if intent is from the MainActivity
+        mCurrentUri = getIntent().getData();
+
         // Reference to the subject listview
         ListView subjectListView = (ListView)findViewById(R.id.subject_list);
 
         // Attach the loader to the list view
         mCursorAdapter = new SubjectCursorAdapter(this,null);
         subjectListView.setAdapter(mCursorAdapter);
+
+        if(mCurrentUri!=null) { // Intent is from ActivityAddToDay
+            // Set up onItemClickListener
+            subjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view,
+                                        int position, long id) {
+                    Toast.makeText(getApplicationContext(),"Id of item: "+id,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         // Initializing the loader
         getLoaderManager().initLoader(SUBJECT_LOADER,null,this);

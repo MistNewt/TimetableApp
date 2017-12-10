@@ -1,6 +1,5 @@
 package com.example.android.timetable;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -14,16 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.timetable.data.TimetableContract;
 import com.example.android.timetable.data.TimetableContract.*;
 
-import static android.text.style.TtsSpan.GENDER_MALE;
 
 /**
  * Created by Sudhanshu on 22-08-2017.

@@ -38,11 +38,17 @@
     <string name = "toast_subject_add_day_failed">Subject can\'t be Added!</string>
     <string name = "toast_subject_already_exists">Subject already exists!</string>
 
-    <!-- Alert messages -->
+    <!-- ALERT MESSAGES -->
     <!-- Unsaved changes alert message -->
     <string name="unsaved_changes_alert">Discard your changes and quit editing?</string>
     <!-- Discard changes alert dialog selection -->
     <string name="discard">Discard</string>
     <!-- Keep editing alert dialog selection -->
     <string name="keep_editing">Keep editing</string>
+
+    <!-- SUBJECT LIST ITEM LABELS (Hidden Layer) -->
+    <string name="attended">Attended</string>
+    <string name="bunked">Bunked</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="reset">Reset</string>
 </resources>

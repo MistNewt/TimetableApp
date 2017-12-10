@@ -1,22 +1,22 @@
 package com.example.android.timetable;
 
 
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.android.timetable.data.TimetableContract.*;
-
-import static com.example.android.timetable.SubjectsActivity.SUBJECT_LOADER;
 
 /**
  * Created by Sudhanshu on 25-08-2017.
@@ -30,6 +30,10 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
     // For stroing the uri from intent
     Uri mCurrentUri;
 
+    // Two layers of the list item subject
+    LinearLayout mDefaultLayer;
+    LinearLayout mHiddenLayer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +43,19 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         mCurrentUri = getIntent().getData();
 
         // Referenc to the day's list view
-        ListView dayListView = (ListView) findViewById(R.id.day_list);
+        ListView dayListView = (ListView)findViewById(R.id.day_list);
 
         // Set the adapter
         mCursorAdapter = new SubjectCursorAdapter(this,null);
         dayListView.setAdapter(mCursorAdapter);
+
+        // Setting up OnItemClickListeners
+        dayListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                toggleLayers();
+            }
+        });
 
         // Reference to the Floating Action Button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.day_add_fab);
@@ -58,7 +70,19 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         });
 
         // Initializing the loader
-        getLoaderManager().initLoader(DAY_LOADER,null,this);
+        getSupportLoaderManager().initLoader(DAY_LOADER,null,this);
+    }
+
+    private void toggleLayers() {
+        mDefaultLayer = (LinearLayout)findViewById(R.id.list_item_default_layer);
+        mHiddenLayer = (LinearLayout)findViewById(R.id.list_item_hidden_layer);
+        if(mDefaultLayer.getVisibility()==View.VISIBLE) {
+            mHiddenLayer.setVisibility(View.VISIBLE);
+            mDefaultLayer.setVisibility(View.GONE);
+        } else {
+            mHiddenLayer.setVisibility(View.GONE);
+            mDefaultLayer.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -87,4 +111,6 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         // Callback called when data finishes loading
         mCursorAdapter.swapCursor(cursor);
     }
+
+
 }

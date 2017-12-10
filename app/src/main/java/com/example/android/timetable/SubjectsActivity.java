@@ -1,14 +1,15 @@
 package com.example.android.timetable;
 
-import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.CursorLoader;
-import android.content.Loader;
+import android.content.ContentValues;;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.android.timetable.data.TimetableContract;
 import com.example.android.timetable.data.TimetableContract.*;
-
-import static android.R.attr.key;
-import static com.example.android.timetable.data.TimetableContract.TimetableEntry.CLASS_YES;
 
 /**
  * Created by Sudhanshu on 25-08-2017.
@@ -122,7 +119,7 @@ public class SubjectsActivity extends AppCompatActivity implements LoaderManager
         }
 
         // Initializing the loader
-        getLoaderManager().initLoader(SUBJECT_LOADER, null, this);
+        getSupportLoaderManager().initLoader(SUBJECT_LOADER, null, this);
     }
 
     private String matchDay(int dayCode) {

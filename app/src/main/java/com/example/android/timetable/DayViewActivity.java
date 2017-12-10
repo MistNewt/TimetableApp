@@ -1,6 +1,5 @@
 package com.example.android.timetable;
 
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,8 +14,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 

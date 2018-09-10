@@ -43,7 +43,7 @@
     <LinearLayout
         android:id="@+id/list_item_hidden_layer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:padding="@dimen/activity_margin"
         android:visibility="gone">
@@ -54,27 +54,27 @@
             android:layout_weight="4"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
                 android:id="@+id/option_attended"
                 style="@style/OptionAttendedStyle"
                 android:text="@string/attended" />
 
-            <TextView
+            <Button
                 android:id="@+id/option_bunked"
                 style="@style/OptionBunkedStyle"
                 android:text="@string/bunked" />
 
-            <TextView
+            <Button
                 android:id="@+id/option_cancelled"
                 style="@style/OptionCancelledStyle"
                 android:text="@string/cancelled" />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/option_reset"
+                style="@style/OptionResetStyle"
+                android:text="@string/reset" />
 
-        <TextView
-            android:id="@+id/option_reset"
-            style="@style/OptionResetStyle"
-            android:text="@string/reset" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

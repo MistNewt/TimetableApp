@@ -13,8 +13,10 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.timetable.data.TimetableContract.*;
 
@@ -33,6 +35,7 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
     // Two layers of the list item subject
     LinearLayout mDefaultLayer;
     LinearLayout mHiddenLayer;
+    Button mAttended, mBunked, mCancelled, mReset;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,10 +46,10 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         mCurrentUri = getIntent().getData();
 
         // Referenc to the day's list view
-        ListView dayListView = (ListView)findViewById(R.id.day_list);
+        ListView dayListView = (ListView) findViewById(R.id.day_list);
 
         // Set the adapter
-        mCursorAdapter = new SubjectCursorAdapter(this,null);
+        mCursorAdapter = new SubjectCursorAdapter(this, null);
         dayListView.setAdapter(mCursorAdapter);
 
         // Setting up OnItemClickListeners
@@ -63,26 +66,59 @@ public class ActivityAddToDay extends AppCompatActivity implements LoaderManager
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityAddToDay.this,SubjectsActivity.class);
+                Intent intent = new Intent(ActivityAddToDay.this, SubjectsActivity.class);
                 intent.setData(mCurrentUri);
                 startActivity(intent);
             }
         });
 
         // Initializing the loader
-        getSupportLoaderManager().initLoader(DAY_LOADER,null,this);
+        getSupportLoaderManager().initLoader(DAY_LOADER, null, this);
     }
 
     private void toggleLayers() {
-        mDefaultLayer = (LinearLayout)findViewById(R.id.list_item_default_layer);
-        mHiddenLayer = (LinearLayout)findViewById(R.id.list_item_hidden_layer);
-        if(mDefaultLayer.getVisibility()==View.VISIBLE) {
+        mDefaultLayer = (LinearLayout) findViewById(R.id.list_item_default_layer);
+        mHiddenLayer = (LinearLayout) findViewById(R.id.list_item_hidden_layer);
+        if (mDefaultLayer.getVisibility() == View.VISIBLE) {
             mHiddenLayer.setVisibility(View.VISIBLE);
             mDefaultLayer.setVisibility(View.GONE);
-        } else {
-            mHiddenLayer.setVisibility(View.GONE);
-            mDefaultLayer.setVisibility(View.VISIBLE);
         }
+        // Initializing the buttons
+        mAttended = (Button) findViewById(R.id.option_attended);
+        mBunked = (Button) findViewById(R.id.option_bunked);
+        mCancelled = (Button) findViewById(R.id.option_cancelled);
+        mReset = (Button) findViewById(R.id.option_reset);
+        // Setting Button Listeners
+        mAttended.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), mAttended.getText() + " clicked!!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        mBunked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), mBunked.getText() + " clicked!!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        mCancelled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), mCancelled.getText() + " clicked!!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        mReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), mReset.getText() + " clicked!!",
+                        Toast.LENGTH_SHORT).show();
+                mHiddenLayer.setVisibility(View.GONE);
+                mDefaultLayer.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override

@@ -23,6 +23,11 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
     Context mContext;
     ArrayList<CardItem> mCardItems;
 
+    public MyCardAdapter(Context context, ArrayList<CardItem> items) {
+        mContext = context;
+        mCardItems = items;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView titleTextView, totalSubjectsTextView, overallPerTextView;
 
@@ -68,11 +73,6 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.MyViewHold
             default: id = TimetableEntry.DAY_NO_DAY;
         }
         return id;
-    }
-
-    public MyCardAdapter(Context context, ArrayList<CardItem> items) {
-        mContext = context;
-        mCardItems = items;
     }
 
     @Override

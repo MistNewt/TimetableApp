@@ -1,7 +1,7 @@
 package com.example.android.timetable;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.database.Cursor;;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +46,8 @@ public class SubjectCursorAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView nameTextView = (TextView) view.findViewById(R.id.name);
-        TextView attendanceTextView = (TextView) view.findViewById(R.id.attendance);
+        TextView nameTextView = (TextView) view.findViewById(R.id.subject_name);
+        TextView attendanceTextView = (TextView) view.findViewById(R.id.subject_attendance);
 
         int nameColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_SUBJECT_NAME);
         int presentColIndex = cursor.getColumnIndex(SubjectEntry.COLUMN_CLASSES_PRESENT);
@@ -56,11 +56,13 @@ public class SubjectCursorAdapter extends CursorAdapter {
         int presentClasses = cursor.getInt(presentColIndex);
         int totalClasses = cursor.getInt(totalColIndex);
 
-        double attendance = (double) presentClasses / totalClasses;
-
+        double attendance = ((double) presentClasses / totalClasses)*100;
+        // Rounding-off to two decimal places
+        attendance = Math.round(attendance*100.0);
+        attendance /= 100;
         nameTextView.setText(cursor.getString(nameColIndex));
         attendanceTextView.setText(context.getString(R.string.attendance) + ": " +
-                Double.toString(attendance));
+                Double.toString(attendance)+" %");
 
     }
 }

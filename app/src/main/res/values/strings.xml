@@ -11,7 +11,6 @@
 
     <!-- ADD NEW SUBJECT RELATED STRING -->
     <!-- Category Day -->
-    <string name="category_day">Day</string>
     <!-- Category Subject -->
     <string name="category_subject">Subject</string>
     <!-- Category Attendance -->
@@ -30,24 +29,26 @@
     <string name = "title_overall_per">Overall %:</string>
 
     <!-- DAYS OF A WEEK -->
-    <string name="day_sunday">Sunday</string>
-    <string name="day_monday">Monday</string>
-    <string name="day_tuesday">Tuesday</string>
-    <string name="day_wednesday">Wednesday</string>
-    <string name="day_thursday">Thursday</string>
-    <string name="day_friday">Friday</string>
-    <string name="day_saturday">Saturday</string>
     <string name="day_no_day">No Day Selected</string>
 
     <!-- Toast messages -->
     <string name = "toast_subject_save_success">Subject Successfully Saved!</string>
     <string name = "toast_subject_save_failed">Subject can\'t be saved!</string>
+    <string name = "toast_subject_add_day_success">Subject Successfully Added!</string>
+    <string name = "toast_subject_add_day_failed">Subject can\'t be Added!</string>
+    <string name = "toast_subject_already_exists">Subject already exists!</string>
 
-    <!-- Alert messages -->
+    <!-- ALERT MESSAGES -->
     <!-- Unsaved changes alert message -->
     <string name="unsaved_changes_alert">Discard your changes and quit editing?</string>
     <!-- Discard changes alert dialog selection -->
     <string name="discard">Discard</string>
     <!-- Keep editing alert dialog selection -->
     <string name="keep_editing">Keep editing</string>
+
+    <!-- SUBJECT LIST ITEM LABELS (Hidden Layer) -->
+    <string name="attended">Attended</string>
+    <string name="bunked">Bunked</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="reset">Reset</string>
 </resources>

@@ -7,12 +7,10 @@ package com.example.android.timetable;
 public class CardItem {
     private String mDayTitle;
     private int mTotalSubjects;
-    private double mOverallPercentage;
 
-    public CardItem(String title,int totalSubjects,double overallPercentage) {
+    public CardItem(String title,int totalSubjects) {
         mDayTitle = title;
         mTotalSubjects= totalSubjects;
-        mOverallPercentage = overallPercentage;
     }
 
     public String getTitle() {
@@ -21,9 +19,5 @@ public class CardItem {
 
     public int getTotalSubjects() {
         return mTotalSubjects;
-    }
-
-    public double getOverallPercentage() {
-        return mOverallPercentage;
     }
 }

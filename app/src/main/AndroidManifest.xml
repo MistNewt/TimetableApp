@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.timetable">
 
     <application
@@ -9,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0"
+            tools:replace="android:value" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,8 +24,26 @@
         </activity>
 
         <activity
+            android:name=".DayViewActivity"
+            android:parentActivityName=".MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".SubjectsActivity"
+            android:parentActivityName=".MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
             android:name=".AddSubjectActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".DayViewActivity"
             android:theme="@style/EditorTheme">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -28,10 +52,17 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <provider
-            android:name=".data.SubjectProvider"
-            android:authorities="com.example.android.timetable"
-            android:exported="false" />
+        <activity
+            android:name=".ActivityAddToDay"
+            android:parentActivityName=".DayViewActivity"
+            android:theme="@style/EditorTheme">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DayViewActivity" />
+        </activity>
+
         <provider
             android:name=".data.TimetableProvider"
             android:authorities="com.example.android.timetable"

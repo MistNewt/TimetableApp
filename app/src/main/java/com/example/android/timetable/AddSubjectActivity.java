@@ -1,6 +1,5 @@
 package com.example.android.timetable;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -12,17 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.timetable.data.TimetableContract;
 import com.example.android.timetable.data.TimetableContract.*;
 
-import static android.text.style.TtsSpan.GENDER_MALE;
 
 /**
  * Created by Sudhanshu on 22-08-2017.
@@ -55,7 +50,23 @@ public class AddSubjectActivity extends AppCompatActivity {
         mClassesPresentEditText = (EditText)findViewById(R.id.edit_classes_present);
         mTotalClassesEditText = (EditText)findViewById(R.id.edit_total_classes);
 
+        // Setting up onTouchListeners
+        mSubjectNameEditText.setOnTouchListener(mTouchListner);
+        mClassesPresentEditText.setOnTouchListener(mTouchListner);
+        mTotalClassesEditText.setOnTouchListener(mTouchListner);
+
     }
+
+    // Setting up on touch listener
+    // for warning the user when pet has been changed and not saved
+
+    private View.OnTouchListener mTouchListner = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            mSubjectHasChanged = true;
+            return false;
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,7 +87,9 @@ public class AddSubjectActivity extends AppCompatActivity {
             case R.id.action_save:
                 // Insert new subject
                 saveSubject();
-                // Respond to a click on the "Up" arrow button in the app bar
+                // Return to parent activity
+                finish();
+            // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
                 // If the pet hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.timetable.MainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
+        <TextView
+            android:id="@+id/dayview_activity"
+            style="@style/CategoryStyle"
+            android:gravity="center_horizontal"
+            android:text="Day View" />
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_circle_outline" />
+        android:layout_marginTop="@dimen/activity_margin">
 
+        <TextView
+            android:id="@+id/subjects_activity"
+            style="@style/CategoryStyle"
+            android:gravity="center_horizontal"
+            android:text="Subjects" />
+    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
